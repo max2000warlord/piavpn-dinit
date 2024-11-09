@@ -1,0 +1,16 @@
+# /etc/dinit.d/piavpn-daemon
+
+type = process
+command = /opt/piavpn/bin/pia-daemon
+restart = on-failure
+
+# Set the environment variable for the library path
+env-file = /etc/dinit.d/piavpn-daemon.env
+# Ensure it starts after the network is up
+depends-on = NetworkManager
+
+# Run as root, since pia-daemon requires root privileges
+run-as = root
+
+# Optional log file
+logfile = /var/log/piavpn-daemon.log
